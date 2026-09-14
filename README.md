@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tres sitios demo · Felix Rocha
 
-## Getting Started
+Portafolio de demostración: tres sitios completos con identidad visual
+independiente, construidos sobre un mismo proyecto Next.js.
 
-First, run the development server:
+| Ruta | Marca | Qué demuestra |
+|---|---|---|
+| `/` | Hub | Presentación de los tres proyectos |
+| `/nova` | **Nova** — agencia creativa | WebGL con shader propio, scroll cinemático, cursor magnético |
+| `/altura` | **Altura** — inmobiliaria | Filtros, comparador, calculadora de hipoteca, formularios validados |
+| `/impulso` | **Impulso** — lanzamiento | Configurador 3D del producto, cuenta regresiva, captura de leads |
+
+## Correr en local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 ·
+Three.js · GSAP + ScrollTrigger · Lenis
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Decisiones que vale la pena conocer
 
-## Learn More
+- **Un proyecto, tres identidades.** Los tokens semánticos (`--site-*`) se
+  redefinen por ruta con `[data-site]`, así que `bg-bg` o `text-accent`
+  significan cosas distintas en cada sitio sin duplicar una sola clase.
+- **Todo funciona sin conexión.** Las fuentes se autohospedan con
+  `next/font` y las fotos viven en `public/img` ya optimizadas a WebP.
+  No hay una sola llamada a un CDN externo en tiempo de ejecución.
+- **Móvil no es un ajuste final.** El recorrido horizontal de Nova sólo
+  se registra en pantallas grandes (`gsap.matchMedia`), el cursor
+  personalizado no se monta en táctil y las escenas WebGL bajan su
+  resolución y su número de partículas según el ancho.
+- **Las escenas 3D se apagan solas** cuando salen de pantalla, y liberan
+  geometrías, materiales y el contexto WebGL al desmontarse.
+- **`prefers-reduced-motion` se respeta en los tres sitios**: las escenas
+  dibujan un cuadro fijo y las apariciones se vuelven inmediatas.
 
-To learn more about Next.js, take a look at the following resources:
+Los formularios son demostrativos: validan de verdad, pero no envían
+nada a ningún servidor.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Créditos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Fotografías de [Unsplash](https://unsplash.com) bajo su licencia de uso
+libre. Ver `public/img/CREDITS.md`.

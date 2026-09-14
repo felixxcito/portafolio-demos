@@ -1,26 +1,259 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ───────────────────────────────────────────────────────────
+   Tokens semánticos.
+   Tailwind los consume por referencia (@theme inline), así que
+   `bg-bg` o `text-accent` significan cosas distintas según la
+   ruta: cada sitio redefine --site-* en su propio scope.
+   ─────────────────────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--site-bg);
+  --color-surface: var(--site-surface);
+  --color-elevated: var(--site-elevated);
+  --color-fg: var(--site-fg);
+  --color-muted: var(--site-muted);
+  --color-faint: var(--site-faint);
+  --color-accent: var(--site-accent);
+  --color-accent-fg: var(--site-accent-fg);
+  --color-accent-soft: var(--site-accent-soft);
+  --color-line: var(--site-line);
+
+  --font-display: var(--site-display);
+  --font-body: var(--site-body);
+
+  /* Escala fluida: cada tamaño tiene su propia composición en
+     móvil, no es el tamaño de desktop encogido. */
+  --text-hero: clamp(2.75rem, 8.4vw, 7.5rem);
+  --text-hero--line-height: 0.9;
+  --text-hero--letter-spacing: -0.045em;
+
+  --text-display: clamp(2.25rem, 6.2vw, 5.25rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-title: clamp(1.65rem, 3.6vw, 2.85rem);
+  --text-title--line-height: 1.08;
+  --text-title--letter-spacing: -0.025em;
+
+  --text-lead: clamp(1.05rem, 1.7vw, 1.35rem);
+  --text-lead--line-height: 1.55;
+
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.2;
+  --text-micro--letter-spacing: 0.16em;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Paleta por defecto (HUB) — neutra a propósito, para que los
+   tres sitios se sientan como el contenido y no como el marco. */
+:root {
+  --site-bg: #0b0b0d;
+  --site-surface: #131317;
+  --site-elevated: #1b1b21;
+  --site-fg: #f7f7f8;
+  --site-muted: #a1a1aa;
+  --site-faint: #6b6b76;
+  --site-accent: #ffffff;
+  --site-accent-fg: #0b0b0d;
+  --site-accent-soft: rgb(255 255 255 / 0.08);
+  --site-line: rgb(255 255 255 / 0.11);
+  --site-display: var(--font-inter-tight), system-ui, sans-serif;
+  --site-body: var(--font-inter-tight), system-ui, sans-serif;
+}
+
+/* NOVA — agencia creativa. Casi negro con lima ácido. */
+[data-site="nova"] {
+  --site-bg: #08080a;
+  --site-surface: #101014;
+  --site-elevated: #17171d;
+  --site-fg: #f2f2f0;
+  --site-muted: #8f8f93;
+  --site-faint: #5c5c63;
+  --site-accent: #ccff33;
+  --site-accent-fg: #08080a;
+  --site-accent-soft: rgb(204 255 51 / 0.12);
+  --site-line: rgb(242 242 240 / 0.1);
+  --site-display: var(--font-syne), system-ui, sans-serif;
+  --site-body: var(--font-inter-tight), system-ui, sans-serif;
+}
+
+/* ALTURA — inmobiliaria. Hueso cálido, tinta y latón. */
+[data-site="altura"] {
+  --site-bg: #f8f6f2;
+  --site-surface: #ffffff;
+  --site-elevated: #f1ede6;
+  --site-fg: #1a1714;
+  --site-muted: #6b6257;
+  --site-faint: #9c9287;
+  --site-accent: #9a7b4f;
+  --site-accent-fg: #ffffff;
+  --site-accent-soft: rgb(154 123 79 / 0.1);
+  --site-line: rgb(26 23 20 / 0.12);
+  --site-display: var(--font-instrument), Georgia, serif;
+  --site-body: var(--font-dm), system-ui, sans-serif;
+}
+
+/* IMPULSO — lanzamiento de producto. Azul noche y violeta. */
+[data-site="impulso"] {
+  --site-bg: #080a14;
+  --site-surface: #0f1220;
+  --site-elevated: #171b2e;
+  --site-fg: #f4f6fb;
+  --site-muted: #9aa3bd;
+  --site-faint: #626b87;
+  --site-accent: #7c5cff;
+  --site-accent-fg: #ffffff;
+  --site-accent-soft: rgb(124 92 255 / 0.16);
+  --site-line: rgb(244 246 251 / 0.1);
+  --site-display: var(--font-space), system-ui, sans-serif;
+  --site-body: var(--font-inter-tight), system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    min-width: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--site-bg);
+    color: var(--site-fg);
+    font-family: var(--site-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--site-accent);
+    color: var(--site-accent-fg);
+  }
+
+  /* Foco visible y consistente en los tres sitios. */
+  :focus-visible {
+    outline: 2px solid var(--site-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Evita que un titular enorme desborde en pantallas angostas. */
+  h1, h2, h3 {
+    overflow-wrap: break-word;
+  }
+
+  img, video, canvas {
+    display: block;
+    max-width: 100%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Altura de viewport que sobrevive a la barra de Safari iOS. */
+  .min-h-screen-d {
+    min-height: 100svh;
+  }
+  .h-screen-d {
+    height: 100svh;
+  }
+
+  /* Contenedor editorial compartido. */
+  .shell {
+    width: 100%;
+    max-width: 84rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+  }
+
+  .eyebrow {
+    font-size: var(--text-micro);
+    line-height: 1.2;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--site-faint);
+  }
+
+  /* Grano sutil: rompe los degradados planos y hace que el dark
+     se sienta impreso en vez de digital. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Red de seguridad: si el sistema pide menos movimiento —o si la
+   máquina de la demo va lenta— todo se degrada a fundidos. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes fadein {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0) }
+  to   { transform: translateX(-100%) }
+}
+
+@keyframes marquee-rev {
+  from { transform: translateX(-100%) }
+  to   { transform: translateX(0) }
+}
+
+/* Aparición al entrar en viewport (ver components/motion/Reveal.tsx).
+   Al vivir en CSS, la variante sin movimiento es una regla más y no
+   una rama de JavaScript. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Sin JavaScript no hay observer que revele nada, así que el contenido
+   se muestra tal cual. Un portafolio ilegible con JS desactivado sería
+   peor que uno sin animaciones. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

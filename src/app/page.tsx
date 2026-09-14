@@ -1,69 +1,115 @@
-import Image from "next/image";
+import Link from "next/link";
+import { proyectos } from "@/lib/data/proyectos";
 
-export default function Home() {
+export default function Hub() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main className="grain relative min-h-screen-d overflow-hidden">
+      {/* Halo de fondo: da profundidad sin competir con el contenido. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-1/3 left-1/2 h-[110vh] w-[110vw] -translate-x-1/2 opacity-60"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgb(124 92 255 / 0.18), transparent 70%)",
+        }}
+      />
+
+      <div className="shell relative z-[2] flex min-h-screen-d flex-col">
+        <header className="flex items-baseline justify-between gap-4 py-8 sm:py-10">
+          <span className="text-[0.95rem] font-medium tracking-tight">
+            Felix Rocha
+          </span>
+          <span className="eyebrow">Portafolio · 2026</span>
+        </header>
+
+        <section className="flex flex-1 flex-col justify-center py-10 sm:py-16">
+          <p className="eyebrow mb-6">Diseño y desarrollo web</p>
+          <h1 className="max-w-[15ch] text-display font-semibold text-balance">
+            Sitios que no solo se ven bien. Venden.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-7 max-w-[52ch] text-lead text-muted">
+            Tres piezas construidas de cero para mostrar el rango: dirección de
+            arte, animación en tiempo real e interfaces que de verdad funcionan.
+            Todas responsivas, accesibles y listas para producción.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </section>
+
+        <nav aria-label="Proyectos" className="border-t border-line pb-16">
+          <ul>
+            {proyectos.map((p, i) => (
+              <li key={p.slug}>
+                <Link
+                  href={`/${p.slug}`}
+                  style={
+                    {
+                      "--a": p.accent,
+                      "--afg": p.accentFg,
+                    } as React.CSSProperties
+                  }
+                  className="group relative block border-b border-line py-7 transition-colors duration-500 ease-[var(--ease-out-expo)] sm:py-9 hover:[--fgx:var(--afg)]"
+                >
+                  {/* Relleno que barre de izquierda a derecha en hover. */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-[-1.5rem] inset-y-0 origin-left scale-x-0 rounded-sm bg-[var(--a)] transition-transform duration-600 ease-[var(--ease-out-expo)] motion-safe:group-hover:scale-x-100"
+                  />
+
+                  <div className="relative z-[1] flex items-start gap-4 sm:items-center sm:gap-8">
+                    <span className="mt-1 font-mono text-micro text-faint transition-colors duration-400 group-hover:text-[var(--afg)]/60 sm:mt-0">
+                      0{i + 1}
+                    </span>
+
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                        <h2 className="text-title font-semibold tracking-tight transition-colors duration-400 group-hover:text-[var(--afg)]">
+                          {p.marca}
+                        </h2>
+                        <span className="text-sm text-muted transition-colors duration-400 group-hover:text-[var(--afg)]/75">
+                          {p.vertical}
+                        </span>
+                      </div>
+
+                      <p className="mt-2 max-w-[58ch] text-sm leading-relaxed text-muted transition-colors duration-400 group-hover:text-[var(--afg)]/80">
+                        {p.descripcion}
+                      </p>
+
+                      <ul className="mt-4 flex flex-wrap gap-2">
+                        {p.tags.map((t) => (
+                          <li
+                            key={t}
+                            className="rounded-full border border-line px-3 py-1 text-[0.7rem] tracking-wide text-faint transition-colors duration-400 group-hover:border-[var(--afg)]/25 group-hover:text-[var(--afg)]/70"
+                          >
+                            {t}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Marcador de color: en móvil es lo que identifica
+                        cada proyecto, ya que no hay hover. */}
+                    <span
+                      aria-hidden
+                      className="mt-2 size-3 shrink-0 rounded-full bg-[var(--a)] transition-all duration-400 group-hover:bg-[var(--afg)] sm:mt-0 sm:size-2.5"
+                    />
+
+                    <span
+                      aria-hidden
+                      className="hidden shrink-0 text-xl transition-all duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 group-hover:text-[var(--afg)] sm:block"
+                    >
+                      →
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <footer className="flex flex-col gap-2 border-t border-line py-8 text-sm text-faint sm:flex-row sm:items-center sm:justify-between">
+          <p>Next.js · TypeScript · Tailwind · Three.js · GSAP</p>
+          <p>Construido en 2026</p>
+        </footer>
+      </div>
+    </main>
   );
 }
