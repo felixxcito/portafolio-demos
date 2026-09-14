@@ -10,8 +10,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Felix Rocha — Diseño y desarrollo web",
-    template: "%s · Felix Rocha",
+    default: "Felix Arocha — Diseño y desarrollo web",
+    template: "%s · Felix Arocha",
   },
   description:
     "Tres sitios demo construidos de cero: una agencia creativa, una inmobiliaria de lujo y un lanzamiento de producto.",

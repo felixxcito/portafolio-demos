@@ -17,7 +17,7 @@ export default function Hub() {
       <div className="shell relative z-[2] flex min-h-screen-d flex-col">
         <header className="flex items-baseline justify-between gap-4 py-8 sm:py-10">
           <span className="text-[0.95rem] font-medium tracking-tight">
-            Felix Rocha
+            Felix Arocha
           </span>
           <span className="eyebrow">Portafolio · 2026</span>
         </header>

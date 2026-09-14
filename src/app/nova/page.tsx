@@ -234,7 +234,7 @@ export default function Nova() {
       <footer className="border-t border-line py-10">
         <div className="shell flex flex-col gap-3 text-sm text-faint sm:flex-row sm:items-center sm:justify-between">
           <p className="font-display text-lg font-extrabold text-fg">NOVA</p>
-          <p>Proyecto demostrativo · Felix Rocha · 2026</p>
+          <p>Proyecto demostrativo · Felix Arocha · 2026</p>
         </div>
       </footer>
     </>

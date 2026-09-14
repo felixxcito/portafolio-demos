@@ -307,7 +307,7 @@ export default function Impulso() {
       <footer className="border-t border-line py-12">
         <div className="shell flex flex-col gap-4 text-sm text-faint sm:flex-row sm:items-center sm:justify-between">
           <p className="font-display text-lg font-bold text-fg">IMPULSO</p>
-          <p>Proyecto demostrativo · Felix Rocha · 2026</p>
+          <p>Proyecto demostrativo · Felix Arocha · 2026</p>
         </div>
       </footer>
     </>

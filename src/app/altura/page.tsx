@@ -206,7 +206,7 @@ export default function Altura() {
       <footer className="border-t border-line py-12">
         <div className="shell flex flex-col gap-4 text-sm text-faint sm:flex-row sm:items-center sm:justify-between">
           <p className="font-display text-2xl text-fg">Altura</p>
-          <p>Proyecto demostrativo · Felix Rocha · 2026</p>
+          <p>Proyecto demostrativo · Felix Arocha · 2026</p>
         </div>
       </footer>
     </>

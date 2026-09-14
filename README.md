@@ -1,4 +1,4 @@
-# Tres sitios demo · Felix Rocha
+# Tres sitios demo · Felix Arocha
 
 Portafolio de demostración: tres sitios completos con identidad visual
 independiente, construidos sobre un mismo proyecto Next.js.
