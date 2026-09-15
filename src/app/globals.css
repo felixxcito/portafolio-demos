@@ -20,6 +20,7 @@
 
   --font-display: var(--site-display);
   --font-body: var(--site-body);
+  --font-mono: var(--site-mono);
 
   /* Escala fluida: cada tamaño tiene su propia composición en
      móvil, no es el tamaño de desktop encogido. */
@@ -61,6 +62,7 @@
   --site-line: rgb(255 255 255 / 0.11);
   --site-display: var(--font-inter-tight), system-ui, sans-serif;
   --site-body: var(--font-inter-tight), system-ui, sans-serif;
+  --site-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 /* NOVA — agencia creativa. Casi negro con lima ácido. */
@@ -109,6 +111,124 @@
   --site-line: rgb(244 246 251 / 0.1);
   --site-display: var(--font-space), system-ui, sans-serif;
   --site-body: var(--font-inter-tight), system-ui, sans-serif;
+}
+
+/* ───────────────────────────────────────────────────────────
+   CIFRA — inteligencia de datos. El único sitio con dos temas.
+
+   La paleta clara es la base; el bloque de abajo la reescribe en
+   oscuro. Las series de las gráficas se declaran a mano en ambos
+   temas en vez de derivarse del acento: un color que canta sobre
+   papel se apaga sobre tinta, y al revés.
+   ─────────────────────────────────────────────────────────── */
+[data-site="cifra"] {
+  color-scheme: light;
+  --site-bg: #fbfbfa;
+  --site-surface: #ffffff;
+  --site-elevated: #f2f4f4;
+  --site-fg: #0d1413;
+  --site-muted: #5a6a68;
+  /* 4.5:1 sobre el fondo: `faint` rotula los ejes y las notas al pie, que
+     son texto pequeño y real. El gris más claro que se ve bien en una
+     maqueta se queda en 2.9:1 y deja de leerse. */
+  --site-faint: #677674;
+  --site-accent: #0a7d72;
+  --site-accent-fg: #ffffff;
+  --site-accent-soft: rgb(10 125 114 / 0.1);
+  --site-line: rgb(13 20 19 / 0.12);
+  --site-display: var(--font-bricolage), system-ui, sans-serif;
+  --site-body: var(--font-inter-tight), system-ui, sans-serif;
+  --site-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --serie-1: #0a7d72;
+  --serie-2: #c2621b;
+  --serie-3: #3b5bbd;
+  --serie-4: #9c4f86;
+  --serie-5: #5f7d2e;
+  --serie-6: #9a6b3f;
+
+  /* Rampa del mapa de calor: de "sin dato" a máximo. */
+  --rampa-0: rgb(13 20 19 / 0.05);
+  --rampa-1: rgb(10 125 114 / 0.18);
+  --rampa-2: rgb(10 125 114 / 0.36);
+  --rampa-3: rgb(10 125 114 / 0.58);
+  --rampa-4: rgb(10 125 114 / 0.82);
+
+  --positivo: #197a4b;
+  --negativo: #b3402f;
+}
+
+[data-tema="oscuro"] [data-site="cifra"] {
+  color-scheme: dark;
+  --site-bg: #0a0f10;
+  --site-surface: #111819;
+  --site-elevated: #182122;
+  --site-fg: #e9efee;
+  --site-muted: #93a5a3;
+  --site-faint: #718481;
+  --site-accent: #2fd4bd;
+  --site-accent-fg: #04201c;
+  --site-accent-soft: rgb(47 212 189 / 0.14);
+  --site-line: rgb(233 239 238 / 0.12);
+
+  --serie-1: #2fd4bd;
+  --serie-2: #f2a15c;
+  --serie-3: #7fa0f5;
+  --serie-4: #dd8fc4;
+  --serie-5: #a9cf6b;
+  --serie-6: #d7ab7e;
+
+  --rampa-0: rgb(233 239 238 / 0.06);
+  --rampa-1: rgb(47 212 189 / 0.16);
+  --rampa-2: rgb(47 212 189 / 0.34);
+  --rampa-3: rgb(47 212 189 / 0.58);
+  --rampa-4: rgb(47 212 189 / 0.86);
+
+  --positivo: #4ddb96;
+  --negativo: #ff8a75;
+}
+
+/* Sin JavaScript nadie escribe data-tema. Al menos respetamos el
+   sistema en vez de forzar el tema claro. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema]) [data-site="cifra"] {
+    color-scheme: dark;
+    --site-bg: #0a0f10;
+    --site-surface: #111819;
+    --site-elevated: #182122;
+    --site-fg: #e9efee;
+    --site-muted: #93a5a3;
+    --site-faint: #718481;
+    --site-accent: #2fd4bd;
+    --site-accent-fg: #04201c;
+    --site-accent-soft: rgb(47 212 189 / 0.14);
+    --site-line: rgb(233 239 238 / 0.12);
+    --serie-1: #2fd4bd;
+    --serie-2: #f2a15c;
+    --serie-3: #7fa0f5;
+    --serie-4: #dd8fc4;
+    --serie-5: #a9cf6b;
+    --serie-6: #d7ab7e;
+    --rampa-0: rgb(233 239 238 / 0.06);
+    --rampa-1: rgb(47 212 189 / 0.16);
+    --rampa-2: rgb(47 212 189 / 0.34);
+    --rampa-3: rgb(47 212 189 / 0.58);
+    --rampa-4: rgb(47 212 189 / 0.86);
+    --positivo: #4ddb96;
+    --negativo: #ff8a75;
+  }
+}
+
+/* El <body> vive fuera de [data-site], así que conserva el fondo del hub.
+   En los tres sitios monocromáticos da igual —su contenedor cubre todo—,
+   pero en Cifra el tema claro dejaba ver una franja oscura al rebotar el
+   scroll. Como Cifra sí marca el tema en <html>, se pueden alinear sin
+   tocar las otras rutas. */
+[data-tema="claro"] body {
+  background-color: #fbfbfa;
+}
+[data-tema="oscuro"] body {
+  background-color: #0a0f10;
 }
 
 @layer base {
@@ -189,6 +309,14 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
+  /* Cifras de tablero: ancho fijo por dígito para que las columnas
+     se alineen y un número no "salte" al actualizarse. */
+  .numerico {
+    font-family: var(--site-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
   .no-scrollbar {
     scrollbar-width: none;
   }
@@ -255,5 +383,46 @@
   .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────
+   Animaciones de Cifra
+   ─────────────────────────────────────────────────────────── */
+
+/* Dibujo de trazo. El largo real lo mide cada gráfica con
+   getTotalLength() y lo escribe en --largo. */
+@keyframes trazo {
+  from { stroke-dashoffset: var(--largo, 1) }
+  to   { stroke-dashoffset: 0 }
+}
+
+@keyframes crecer-y {
+  from { transform: scaleY(0) }
+  to   { transform: scaleY(1) }
+}
+
+@keyframes pulso-esqueleto {
+  0%, 100% { opacity: 0.5 }
+  50%      { opacity: 0.85 }
+}
+
+.esqueleto {
+  background: var(--site-elevated);
+  border-radius: 0.5rem;
+  animation: pulso-esqueleto 1.6s ease-in-out infinite;
+}
+
+/* El trazo se dibuja sólo si hay permiso para moverse; si no, aparece
+   completo. Igual que .reveal, la decisión vive en CSS y no obliga a
+   ramificar el JavaScript de cada gráfica. */
+@media (prefers-reduced-motion: no-preference) {
+  .trazo-anim {
+    stroke-dasharray: var(--largo, 1);
+    animation: trazo 1.4s var(--ease-out-expo) forwards;
+  }
+  .crece-anim {
+    transform-origin: bottom;
+    animation: crecer-y 0.7s var(--ease-out-expo) backwards;
   }
 }

@@ -39,4 +39,14 @@ export const proyectos: Proyecto[] = [
     accentFg: "#ffffff",
     tags: ["Three.js", "Conversión", "Countdown"],
   },
+  {
+    slug: "cifra",
+    marca: "Cifra",
+    vertical: "Plataforma de datos",
+    descripcion:
+      "Tablero de retail en vivo: gráficas dibujadas a mano en SVG, filtros que viven en la URL y tema claro u oscuro. Sube tu propio CSV y se redibuja con tus números. Sin una sola librería de charts.",
+    accent: "#0a7d72",
+    accentFg: "#ffffff",
+    tags: ["Data-viz", "Estado en URL", "Sube tu CSV"],
+  },
 ];

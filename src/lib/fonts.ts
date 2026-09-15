@@ -4,6 +4,8 @@ import {
   Instrument_Serif,
   DM_Sans,
   Space_Grotesk,
+  Bricolage_Grotesque,
+  JetBrains_Mono,
 } from "next/font/google";
 
 /**
@@ -32,6 +34,27 @@ export const instrumentSerif = Instrument_Serif({
 export const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space",
+  display: "swap",
+});
+
+// CIFRA — grotesca de ancho variable: en titulares grandes se aprieta y
+// gana carácter, en tamaños de interfaz se comporta como una neutra.
+export const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage",
+  display: "swap",
+});
+
+/**
+ * CIFRA — mono para las cifras.
+ *
+ * Un tablero se lee por columnas, no por renglones: con anchos variables
+ * los dígitos bailan y la vista pierde el eje. JetBrains Mono ya viene con
+ * cifras tabulares, así que las columnas se alinean solas.
+ */
+export const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 

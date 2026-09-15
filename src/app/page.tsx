@@ -28,9 +28,10 @@ export default function Hub() {
             Sitios que no solo se ven bien. Venden.
           </h1>
           <p className="mt-7 max-w-[52ch] text-lead text-muted">
-            Tres piezas construidas de cero para mostrar el rango: dirección de
-            arte, animación en tiempo real e interfaces que de verdad funcionan.
-            Todas responsivas, accesibles y listas para producción.
+            Cuatro piezas construidas de cero para mostrar el rango: dirección de
+            arte, animación en tiempo real, visualización de datos e interfaces
+            que de verdad funcionan. Todas responsivas, accesibles y listas para
+            producción.
           </p>
         </section>
 
