@@ -222,13 +222,24 @@
 /* El <body> vive fuera de [data-site], así que conserva el fondo del hub.
    En los tres sitios monocromáticos da igual —su contenedor cubre todo—,
    pero en Cifra el tema claro dejaba ver una franja oscura al rebotar el
-   scroll. Como Cifra sí marca el tema en <html>, se pueden alinear sin
-   tocar las otras rutas. */
-[data-tema="claro"] body {
+   scroll, y hay que alinearlos.
+
+   El :has() no es adorno: data-tema se escribe en <html> y sobrevive a
+   volver al portafolio con navegación de cliente, porque nadie desmonta
+   el <html>. Sin acotar la regla a las páginas que de verdad contienen
+   Cifra, el hub —que es oscuro— heredaba fondo claro con su texto claro
+   y quedaba ilegible. Acotarlo aquí lo vuelve imposible, venga el
+   atributo de donde venga. */
+body:has([data-site="cifra"]) {
   background-color: #fbfbfa;
 }
-[data-tema="oscuro"] body {
+[data-tema="oscuro"] body:has([data-site="cifra"]) {
   background-color: #0a0f10;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema]) body:has([data-site="cifra"]) {
+    background-color: #0a0f10;
+  }
 }
 
 @layer base {

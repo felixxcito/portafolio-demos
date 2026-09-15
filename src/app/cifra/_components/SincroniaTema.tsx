@@ -30,6 +30,14 @@ export function SincroniaTema() {
     } catch {
       raiz.dataset.tema = "claro";
     }
+
+    /* Y se retira al salir de Cifra. El CSS ya está acotado con :has(), así
+       que dejarlo puesto no rompería nada; pero un atributo que anuncia un
+       tema en una ruta que no lo tiene es una mentira esperando a que
+       alguien escriba una regla que se la crea. */
+    return () => {
+      raiz.removeAttribute("data-tema");
+    };
   }, []);
 
   // Dos pestañas abiertas no deberían contradecirse.
