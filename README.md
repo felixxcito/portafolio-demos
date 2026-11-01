@@ -1,5 +1,20 @@
 # Cuatro sitios demo · Felix Arocha
 
+<!-- teaser:start -->
+<p align="center">
+<img src="docs/screenshots/01-nova-hero.jpg" width="32%" alt="Nova, agencia creativa: portada con partículas WebGL en tiempo real"> <img src="docs/screenshots/02-altura-hero.jpg" width="32%" alt="Altura, inmobiliaria de lujo: portada cinematográfica"> <img src="docs/screenshots/03-impulso-3d.jpg" width="32%" alt="Impulso: producto 3D interactivo con cuenta regresiva">
+</p>
+
+<details><summary>Más capturas</summary>
+
+<p align="center">
+<img src="docs/screenshots/04-altura-catalogo.jpg" width="48%" alt="Altura: catálogo de residencias con ordenamiento y comparador" title="Altura: catálogo de residencias con ordenamiento y comparador"> <img src="docs/screenshots/05-nova-trabajos.jpg" width="48%" alt="Nova: carrusel horizontal de proyectos con scroll cinemático" title="Nova: carrusel horizontal de proyectos con scroll cinemático"> <img src="docs/screenshots/06-hub.jpg" width="48%" alt="Hub del portafolio con los proyectos demo" title="Hub del portafolio con los proyectos demo">
+</p>
+
+</details>
+<!-- teaser:end -->
+
+
 Portafolio de demostración: cuatro sitios completos con identidad visual
 independiente, construidos sobre un mismo proyecto Next.js.
 
